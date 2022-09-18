@@ -1,6 +1,7 @@
 import React from "react";
-import { ScrollView } from "react-native";
 import FeedPost from "../components/FeedPost";
+import posts from "../../assets/data/posts.json"
+import { ScrollView, FlatList } from "react-native";
 
 
 const post1 = {
@@ -50,9 +51,10 @@ const post1 = {
 const FeedScreen = () => {
   return (
     <ScrollView>
-      <FeedPost post={post1} />
+      {/* <FeedPost post={post1} />
       <FeedPost post={post2} />
-      <FeedPost post={post3} />
+      <FeedPost post={post3} /> */}
+      <FlatList data={posts} renderItem={({item})=> <FeedPost post={item}/>} showsVerticalScrollIndicator={false}/>
     </ScrollView>
   );
 };
