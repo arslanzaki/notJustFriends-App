@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Image, View } from "react-native";
+import { StyleSheet, Text, Image, View, Pressable } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import LikeImage from "../../assets/images/like.png";
 import {
@@ -7,6 +7,7 @@ import {
   FontAwesome5,
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
+import { useState } from "react";
 
 // const post = {
 //   id: "p1",
@@ -23,7 +24,8 @@ import {
 //   numberOfLikes: 11,
 //   numberOfShares: 2,
 // };
-export default function FeedPost({post}) {
+export default function FeedPost({ post }) {
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <>
       {/* Post component */}
@@ -70,10 +72,23 @@ export default function FeedPost({post}) {
 
           <View style={styles.buttonsRow}>
             {/* Like button */}
-            <View style={styles.iconButton}>
-              <AntDesign name="like2" size={18} color="gray" />
-              <Text style={styles.iconButtonText}>Like</Text>
-            </View>
+            <Pressable onPress={()=> setIsLiked(!isLiked)} style={styles.iconButton}>
+              
+                <AntDesign
+                  name="like2"
+                  size={18}
+                  color={isLiked ? "royalblue" : "gray"}
+                />
+                <Text
+                  style={[
+                    styles.iconButtonText,
+                    { color: isLiked ? "royalblue" : "gray" },
+                  ]}
+                >
+                  Like
+                </Text>
+              
+            </Pressable>
 
             {/* Comment button */}
             <View style={styles.iconButton}>
