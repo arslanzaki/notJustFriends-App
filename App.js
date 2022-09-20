@@ -3,13 +3,15 @@ import { StatusBar, StyleSheet, View } from "react-native";
 import CreatePostScreen from "./src/screens/CreatePostScreen";
 
 import FeedScreen from "./src/screens/FeedScreen";
+import Navigator from "./src/navigation"
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <StatusBar/>
+      <StatusBar style="auto"/>
       {/* <FeedScreen /> */}
-      <CreatePostScreen />
+      {/* <CreatePostScreen /> */}
+      <Navigator />
     </View>
   );
 };
@@ -18,6 +20,7 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    flex: 1,
+    backgroundColor: '#c9c9c9'
   },
 });

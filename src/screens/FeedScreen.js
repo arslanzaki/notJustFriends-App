@@ -1,62 +1,69 @@
 import React from "react";
 import FeedPost from "../components/FeedPost";
-import posts from "../../assets/data/posts.json"
-import { ScrollView, FlatList } from "react-native";
+import posts from "../../assets/data/posts.json";
+import {
+  ScrollView,
+  FlatList,
+  StyleSheet,
+  Pressable,
+  Image,
+  Text
+} from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Entypo } from "@expo/vector-icons";
 
-
-const post1 = {
-    id: "p1",
-    createdAt: "19 m", 
-    User: {
-      id: "u1",
-      image:
-        "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/zuck.jpeg",
-      name: "Vadim Savin",
-    },
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
-    image: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg",
-    numberOfLikes: 11,
-    numberOfShares: 2,
-  };
-  
-  const post2 = {
-    id: "p2",
-    createdAt: "10 m", 
-    User: {
-      id: "u2",
-      image:
-        "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
-      name: "Elon Musk",
-    },
-    description: "Today we launched another rocket 🚀",
-    numberOfLikes: 11,
-    numberOfShares: 2,
-  };
-  const post3 = {
-    id: "p2",
-    createdAt: "10 m", 
-    User: {
-      id: "u2",
-      image:
-        "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/jeff.jpeg",
-      name: "Jeff",
-    },
-    description: "View from my office 😍",
-    image: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/5.jpeg",
-    numberOfLikes: 11,
-    numberOfShares: 2,
-  };
+const img = "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/user.png";
 
 const FeedScreen = () => {
+  const navigation = useNavigation();
+
+  const createPost = () => {
+    navigation.navigate("Create Post");
+  };
+
   return (
-    <ScrollView>
-      {/* <FeedPost post={post1} />
-      <FeedPost post={post2} />
-      <FeedPost post={post3} /> */}
-      <FlatList data={posts} renderItem={({item})=> <FeedPost post={item}/>} showsVerticalScrollIndicator={false}/>
-    </ScrollView>
+      <FlatList
+        data={posts}
+        renderItem={({ item }) => <FeedPost post={item} />}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={() => (
+          <Pressable onPress={createPost} style={styles.header}>
+            <Image source={{ uri: img }} style={styles.profileImage} />
+            <Text style={styles.name}>What's on your mind?</Text>
+            <Entypo
+              name="images"
+              size={24}
+              color="limegreen"
+              style={styles.icon}
+            />
+          </Pressable>
+        )}
+      />
+    
   );
 };
 
 export default FeedScreen;
+
+const styles = StyleSheet.create({
+  header: {
+    padding: 10,
+    paddingVertical: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    width: "100%",
+    backgroundColor: "white",
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 25,
+    marginRight: 10,
+  },
+  name: {
+    color: "gray",
+  },
+  icon: {
+    marginLeft: "auto",
+  },
+});

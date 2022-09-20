@@ -5,8 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 
 const user = {
   id: "u1",
-  image:
-    "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
+  image: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.jpg",
   name: "Vadim Savin",
 };
 
@@ -36,7 +35,7 @@ const CreatePostScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Create Post Screen</Text>
+      {/* <Text>Create Post Screen</Text> */}
 
       <View style={styles.header}>
         <Image source={{ uri: user.image }} style={styles.profileImage} />
@@ -67,7 +66,7 @@ const CreatePostScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    //flex: 1,
+    flex: 1,
     backgroundColor: "white",
     width: "100%",
     padding: 10,
