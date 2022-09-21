@@ -8,6 +8,7 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 // const post = {
 //   id: "p1",
@@ -26,12 +27,18 @@ import { useState } from "react";
 // };
 export default function FeedPost({ post }) {
   const [isLiked, setIsLiked] = useState(false);
+  const navigation = useNavigation();
   return (
     <>
       {/* Post component */}
       <View style={styles.post}>
         {/* Post Header with details about the author */}
-        <View style={styles.header}>
+        <Pressable
+          onPress={() =>
+            navigation.navigate("Profile", { id: post.postUserId })
+          }
+          style={styles.header}
+        >
           <Image
             source={{ uri: post.User.image }}
             style={styles.profileImage}
@@ -46,7 +53,7 @@ export default function FeedPost({ post }) {
             color="gray"
             style={styles.icon}
           />
-        </View>
+        </Pressable>
 
         {/* Post body with description and image */}
 
@@ -72,22 +79,23 @@ export default function FeedPost({ post }) {
 
           <View style={styles.buttonsRow}>
             {/* Like button */}
-            <Pressable onPress={()=> setIsLiked(!isLiked)} style={styles.iconButton}>
-              
-                <AntDesign
-                  name="like2"
-                  size={18}
-                  color={isLiked ? "royalblue" : "gray"}
-                />
-                <Text
-                  style={[
-                    styles.iconButtonText,
-                    { color: isLiked ? "royalblue" : "gray" },
-                  ]}
-                >
-                  Like
-                </Text>
-              
+            <Pressable
+              onPress={() => setIsLiked(!isLiked)}
+              style={styles.iconButton}
+            >
+              <AntDesign
+                name="like2"
+                size={18}
+                color={isLiked ? "royalblue" : "gray"}
+              />
+              <Text
+                style={[
+                  styles.iconButtonText,
+                  { color: isLiked ? "royalblue" : "gray" },
+                ]}
+              >
+                Like
+              </Text>
             </Pressable>
 
             {/* Comment button */}
